@@ -2,10 +2,13 @@ package com.example.local_map_restful.control;
 
 import com.example.local_map_restful.User;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 
 /**
@@ -35,6 +38,7 @@ public class UserController {
      * @return List<User>
      */
     @GetMapping("/list")
+    @Operation(summary = "获取用户列表", description = "获取用户列表")
     public List<User> getUser() {
         return new ArrayList<>(users.values());
     }
@@ -45,7 +49,8 @@ public class UserController {
      * @return string
      */
     @PostMapping("/add")
-    public String addUser(@RequestBody User user) {
+    @Operation(summary = "新增用户", description = "新增用户")
+    public String addUser(@Valid @RequestBody User user) {
         users.put(user.getId(), user);
         return "success";
     }
@@ -56,6 +61,10 @@ public class UserController {
      * @return User
      */
     @GetMapping("/{id}")
+    @Parameters({
+            @Parameter(name = "id", description = "用户id", required = true)
+    })
+    @Operation(summary = "根据id获取用户", description = "根据id获取用户")
     public User getUser(@PathVariable Long id) {
         return users.get(id);
     }
@@ -70,6 +79,7 @@ public class UserController {
      * @return string
      */
     @PutMapping("/{id}")
+    @Operation(summary = "根据id修改用户", description = "根据id修改用户")
     public String putUser(@PathVariable Long id, @RequestBody User user) {
         User u = users.get(id);
         u.setName(user.getName());
@@ -85,6 +95,7 @@ public class UserController {
      * @return string
      */
     @DeleteMapping("/{id}")
+    @Operation(summary = "根据id删除用户", description = "根据id删除用户")
     public String deleteUser(@PathVariable Long id) {
         users.remove(id);
         return "success";
