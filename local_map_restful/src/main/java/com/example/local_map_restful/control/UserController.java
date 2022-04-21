@@ -1,6 +1,9 @@
 package com.example.local_map_restful.control;
 
 import com.example.local_map_restful.User;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -10,6 +13,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User", description = "用户接口")
 public class UserController {
 
     /*创建 线程安全的 hashmap*/
@@ -21,6 +25,7 @@ public class UserController {
      * @return string
      */
     @GetMapping("/")
+    @Operation(summary = "测试接口", description = "测试接口")
     public String getUsers() {
         return "u made it";
     }
