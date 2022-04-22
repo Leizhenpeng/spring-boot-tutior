@@ -2,6 +2,7 @@ package com.example.druid_flyway_mybatis_mysql.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author river

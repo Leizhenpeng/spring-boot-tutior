@@ -41,6 +41,7 @@ public interface UserService {
 	/**
 	 * 删除所有用户
 	 * @return	删除的用户数量
+
 	 */
 	int deleteAll();
 }
